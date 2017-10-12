@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Form extends Component {
+class PlainText extends Component {
   constructor(props) {
     super(props)
 
@@ -8,16 +8,6 @@ class Form extends Component {
       text: '',
       textArray: []
     }
-  }
-
-  findTweets = text => {
-    let url = `https://cors-anywhere.herokuapp.com/https://dry-peak-75080.herokuapp.com/1.1/statuses/user_timeline.json?screen_name=${text}&count=10`
-    fetch(url).then(r => r.json()).then(json => {
-      let texts = json.map(tweet => {
-        return tweet.text
-      })
-      this.setState({ textArray: texts })
-    })
   }
 
   _text = e => {
@@ -29,8 +19,12 @@ class Form extends Component {
   _submit = e => {
     e.preventDefault()
     let text = this.state.text
+    let newArray = this.state.textArray
+    newArray.push(text)
 
-    this.findTweets(text)
+    this.setState({
+      text: text
+    })
 
     let input_reset = document.querySelector('#input_reset')
     input_reset.value = ''
@@ -40,11 +34,10 @@ class Form extends Component {
     return (
       <div>
         <form onSubmit={this._submit}>
-          <div />
           <div>
-            <label>Twitter Handle</label>
+            <label>Plain Text Here</label>
             <br />
-            <input type="text" id="input_reset" onChange={this._text} placeholder="No '@' needed!" />
+            <textarea type="text" id="input_reset" onChange={this._text} placeholder="Copy and Paste text here" />
           </div>
           <button>Check Results!</button>
         </form>
@@ -60,4 +53,4 @@ class Form extends Component {
   }
 }
 
-export default Form
+export default PlainText
