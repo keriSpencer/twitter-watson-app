@@ -1,12 +1,37 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
 class Baselayout extends Component {
   render() {
     return (
       <div className="baseLayout">
-        <h2>Home | Results | Research | Observations</h2>
+        <div className="nav">
+          <ul id="navOptions">
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/text">Text</NavLink>
+            </li>
+            <li>
+              <NavLink to="research">Research</NavLink>
+            </li>
+            <li>
+              <NavLink to="/observations">Observations</NavLink>
+            </li>
+          </ul>
+        </div>
         {this.props.children}
-        <h4 id="footer">405.625.7150 | kerigspencer@gmail.com | About | Created by Keri Spencer</h4>
+        <ul id="footer">
+          <li className="footerItem">405.625.7150</li>
+          <li className="footerItem">|</li>
+          <li className="footerItem">kerigspencer@gmail.com</li>
+          <li className="footerItem">|</li>
+          <li className="footerItem">Keri Spencer</li>
+        </ul>
       </div>
     )
   }

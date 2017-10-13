@@ -32,8 +32,8 @@ class PlainText extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this._submit}>
+      <div id="text">
+        <form className="form" onSubmit={this._submit}>
           <div>
             <label>Plain Text Here</label>
             <br />
