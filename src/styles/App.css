@@ -7,7 +7,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #666;
-  /*background-image: url("../marius-sebastian-42831.jpg");*/
   background-size: cover;
   repeat: no-repeat;
   height: auto;
@@ -17,6 +16,12 @@ ul#navOptions {
   background-color: white;
   padding: 1.09em;
   margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  padding: 1.09em;
+  font-size: 22px;
+  /*margin-bottom: 48em;*/
 }
 
 .baseLayout {
@@ -35,18 +40,20 @@ span#home {
 ul {
   list-style: none;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0;
+  color: white;
 }
 
 li {
   padding-left: 2em;
-  font-size: 22px;
+  font-size: 16px;
+  line-height: 1.8em;
+  padding-left: 3em;
 }
 
 ul,
-h4,
-label {
+h4 {
   font-family: 'Raleway', sans-serif;
 }
 
@@ -54,7 +61,7 @@ label,
 h2 {
   color: white;
   font-size: 38px;
-  font-family: 'Anton', 'sans-serif';
+  font-family: 'Playfair Display', serif;
   letter-spacing: 2px;
 }
 
@@ -77,6 +84,7 @@ button {
 a {
   text-decoration: none;
   color: #666;
+  font-size: 22px;
 }
 
 a:hover {
@@ -85,8 +93,6 @@ a:hover {
 }
 
 #appForm,
-.research,
-.observations,
 #text {
   height: 300px;
   width: 100%;
@@ -95,6 +101,13 @@ a:hover {
   justify-content: baseline;
   flex-direction: column;
   padding-top: 7em;
+}
+
+.observations,
+.research {
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10em;
 }
 
 form.form,
@@ -106,34 +119,27 @@ form.form,
   align-items: center;
 }
 
-h2,
-p {
-  color: white;
-}
-
 p {
   width: 80%;
-}
-
-.observations,
-.research {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 6em;
-  margin: 0 10em;
+  color: white;
+  font-family: 'Raleway', 'sans-serif';
+  padding-left: 3em;
+  font-size: 16px;
+  line-height: 1.8em;
 }
 
 #footer {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   background-color: white;
-  padding: 2em 1.09em 1.09em 1.09em;
+  padding: 1.09em;
   margin-top: 10em;
-  margin-bottom: 0;
+  margin-bottom: 1.5em;
   position: fixed;
   bottom: 0;
   width: 100%;
+  color: #666;
 }
 
 .footerItem {
@@ -147,10 +153,11 @@ div#marginBottom {
 h3 {
   color: white;
   font-size: 1.3em;
-}
-
-.results {
-  padding-left: 3em;
+  font-family: 'Playfair Display';
+  padding-left: 2.2em;
+  padding-top: 2.2em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ccc;
 }
 
 div#resultBox {
@@ -161,9 +168,11 @@ div#resultBox {
 div.tweetBox {
   margin: 2em 3em;
   padding: 1em;
+  width: 45%;
 }
 
-div.tweetBoxShowing {
+div.tweetBoxShowing,
+div.gaugeShowing {
   border: 4px solid white;
   margin: 2em 3em;
   padding: 1em;
@@ -171,4 +180,9 @@ div.tweetBoxShowing {
 
 .hide {
   display: none;
+}
+
+#gauge {
+  width: 100%;
+  height: 500px;
 }

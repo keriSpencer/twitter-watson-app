@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '/Users/kerispencer/Development/react/twitter-watson-app/src/styles/App.css'
 import Results from './Results'
+import Gauge from './Gauge'
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends Component {
   }
 
   findTweets = text => {
-    let url = `https://cors-anywhere.herokuapp.com/https://dry-peak-75080.herokuapp.com/1.1/statuses/user_timeline.json?screen_name=${text}&count=10`
+    let url = `https://cors-anywhere.herokuapp.com/https://dry-peak-75080.herokuapp.com/1.1/statuses/user_timeline.json?screen_name=${text}&count=5`
     fetch(url).then(r => r.json()).then(json => {
       let texts = json.map(tweet => {
         return tweet.text
@@ -67,12 +68,14 @@ class App extends Component {
             <button>Check Results!</button>
           </form>
         </div>
-        <div id="tweetResults" className="tweetBox">
-          {this.state.tweetsArray.map((text, i) =>
-            <p key={i} className="results">
-              {text}
-            </p>
-          )}
+        <div className="tweetsWrap">
+          <div id="tweetResults" className="tweetBox">
+            {this.state.tweetsArray.map((text, i) =>
+              <p key={i} className="results">
+                {text}
+              </p>
+            )}
+          </div>
         </div>
         <div id="marginBottom">
           {this.state.personalityArray
@@ -80,16 +83,15 @@ class App extends Component {
               return b.percentile - a.percentile
             })
             .map((trait, i) =>
-              <div id="resultBox">
-                <h3 key={i} className="results">
+              <div key={i} id="resultBox">
+                <h3 className="results">
                   {trait.name}
+                  <Gauge percentile={Math.floor(trait.percentile * 100)} />
                 </h3>
-                <p className="results">
-                  {Math.floor(trait.percentile * 100)}%
-                </p>
+
                 <div>
                   {trait.children.map((name, j) =>
-                    <p>
+                    <p key={j}>
                       {name.name}
                     </p>
                   )}

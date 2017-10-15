@@ -5237,6 +5237,10 @@ react-scripts@1.0.14:
   optionalDependencies:
     fsevents "1.1.2"
 
+react-svg-gauge@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-svg-gauge/-/react-svg-gauge-1.0.6.tgz#31f4a3a9ac175018ba1cc45e26dbdf4775af6d9e"
+
 react-twitter-auth@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-twitter-auth/-/react-twitter-auth-0.0.8.tgz#dfb5a16e62b362a9a5f583da13f9bdce7b477090"

@@ -28,9 +28,9 @@ class Baselayout extends Component {
         <ul id="footer">
           <li className="footerItem">405.625.7150</li>
           <li className="footerItem">|</li>
-          <li className="footerItem">kerigspencer@gmail.com</li>
-          <li className="footerItem">|</li>
           <li className="footerItem">Keri Spencer</li>
+          <li className="footerItem">|</li>
+          <li className="footerItem">kerigspencer@gmail.com</li>
         </ul>
       </div>
     )
