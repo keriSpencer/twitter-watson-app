@@ -149,10 +149,6 @@ ul#footer {
   font-size: 16px;
 }
 
-div#marginBottom {
-  margin-bottom: 6em;
-}
-
 h3 {
   color: white;
   font-size: 1.3em;
@@ -190,9 +186,16 @@ div.tweetBox {
 }
 
 div.tweetBoxShowing,
-div.gaugeShowing {
+div.gaugeShowing,
+div.displayTones {
   border: 4px solid white;
-  margin: 2em 3em;
+  margin: .3em 3em 6em 3em;
+  padding: 1em;
+}
+
+div.displayTones {
+  border: 4px solid white;
+  margin: .3em 3em 2em 3em;
   padding: 1em;
 }
 
@@ -207,4 +210,9 @@ div.gaugeShowing {
 
 #tweeter {
   display: none;
+}
+
+.centerText {
+  text-align: center;
+  color: #999;
 }

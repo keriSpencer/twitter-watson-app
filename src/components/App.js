@@ -10,26 +10,20 @@ class App extends Component {
     this.state = {
       text: '',
       tweetsArray: [],
-      personalityArray: []
+      personalityArray: [],
+      tonesArray: []
     }
-  }
-
-  findTweets = text => {
-    let url = `https://cors-anywhere.herokuapp.com/https://dry-peak-75080.herokuapp.com/1.1/statuses/user_timeline.json?screen_name=${text}&count=5`
-    fetch(url).then(r => r.json()).then(json => {
-      let texts = json.map(tweet => {
-        return tweet.text
-      })
-      this.setState({ tweetsArray: texts })
-    })
   }
 
   findPersonality = text => {
     let watsonUrl = `http://localhost:4000/?username=${text}`
     fetch(watsonUrl).then(r => r.json()).then(json => {
       this.setState({
-        personalityArray: json.personality
+        personalityArray: json.personalities.personality,
+        tweetsArray: json.tweets,
+        tonesArray: json.tones.tones
       })
+      console.log(json)
     })
   }
 
@@ -43,7 +37,6 @@ class App extends Component {
     e.preventDefault()
     let username = this.state.text
 
-    this.findTweets(username)
     this.findPersonality(username)
 
     let input_reset = document.querySelector('#input_reset')
@@ -56,6 +49,9 @@ class App extends Component {
 
     let tweeter = document.querySelector('#tweeter')
     tweeter.id = ''
+
+    let tonesDiv = document.querySelector('#tonesDiv')
+    tonesDiv.className = 'displayTones'
   }
 
   render() {
@@ -71,17 +67,12 @@ class App extends Component {
             <button>Check Results!</button>
           </form>
         </div>
-        <div className="tweetsWrap">
-          <div id="tweetResults" className="tweetBox">
-            <h3 id="tweeter">
-              Tweets from @{this.state.text}
-            </h3>
-            {this.state.tweetsArray.map((text, i) =>
-              <p key={i} className="results">
-                {text}
-              </p>
-            )}
-          </div>
+        <div id="tonesDiv" className="hide">
+          {this.state.tonesArray.map((tone, k) =>
+            <h2 className="centerText" key={k}>
+              {tone.tone_name} | {Math.floor(tone.score * 100)}%
+            </h2>
+          )}
         </div>
         <div id="marginBottom">
           {this.state.personalityArray
@@ -104,6 +95,18 @@ class App extends Component {
                 </div>
               </div>
             )}
+        </div>
+        <div className="tweetsWrap">
+          <div id="tweetResults" className="tweetBox">
+            <h3 id="tweeter">
+              Tweets from @{this.state.text}
+            </h3>
+            {this.state.tweetsArray.map((text, i) =>
+              <p key={i} className="results">
+                {text}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     )
