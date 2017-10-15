@@ -53,6 +53,9 @@ class App extends Component {
 
     let box = document.querySelector('#tweetResults')
     box.className = 'tweetBoxShowing'
+
+    let tweeter = document.querySelector('#tweeter')
+    tweeter.id = ''
   }
 
   render() {
@@ -70,6 +73,9 @@ class App extends Component {
         </div>
         <div className="tweetsWrap">
           <div id="tweetResults" className="tweetBox">
+            <h3 id="tweeter">
+              Tweets from @{this.state.text}
+            </h3>
             {this.state.tweetsArray.map((text, i) =>
               <p key={i} className="results">
                 {text}
@@ -84,14 +90,14 @@ class App extends Component {
             })
             .map((trait, i) =>
               <div key={i} id="resultBox">
-                <h3 className="results">
-                  {trait.name}
-                  <Gauge percentile={Math.floor(trait.percentile * 100)} />
-                </h3>
-
+                <div>
+                  <h3 className="results">
+                    <Gauge label={trait.name} percentile={Math.floor(trait.percentile * 100)} />
+                  </h3>
+                </div>
                 <div>
                   {trait.children.map((name, j) =>
-                    <p key={j}>
+                    <p key={j} id="traitName">
                       {name.name}
                     </p>
                   )}
