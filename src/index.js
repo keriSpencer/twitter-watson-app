@@ -8,8 +8,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import App from './components/App'
 import Baselayout from './components/Baselayout'
 import PlainText from './components/PlainText'
-import Research from './components/Research'
-import Observations from './components/Observations'
+import UseCases from './components/UseCases'
+import Examples from './components/Examples'
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,8 +17,8 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/text" component={PlainText} />
-        <Route path="/research" component={Research} />
-        <Route path="/observations" component={Observations} />
+        <Route path="/usecases" component={UseCases} />
+        <Route path="/examples" component={Examples} />
       </Switch>
     </Baselayout>
   </BrowserRouter>,

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import '/Users/kerispencer/Development/react/twitter-watson-app/src/styles/App.css'
+import Results from './Results'
+import Gauge from './Gauge'
 
 class PlainText extends Component {
   constructor(props) {
@@ -6,8 +9,22 @@ class PlainText extends Component {
 
     this.state = {
       text: '',
-      textArray: []
+      tweetsArray: [],
+      personalityArray: [],
+      tonesArray: []
     }
+  }
+
+  findPersonality = text => {
+    let watsonUrl = `http://localhost:4000/?username=${text}`
+    fetch(watsonUrl).then(r => r.json()).then(json => {
+      this.setState({
+        personalityArray: json.personalities.personality,
+        tweetsArray: json.tweets,
+        tonesArray: json.tones.tones
+      })
+      console.log(json)
+    })
   }
 
   _text = e => {
@@ -18,35 +35,78 @@ class PlainText extends Component {
 
   _submit = e => {
     e.preventDefault()
-    let text = this.state.text
-    let newArray = this.state.textArray
-    newArray.push(text)
+    let username = this.state.text
 
-    this.setState({
-      text: text
-    })
+    this.findPersonality(username)
 
     let input_reset = document.querySelector('#input_reset')
     input_reset.value = ''
+    let div = document.querySelector('#foo')
+    div.className = 'hide'
+
+    let box = document.querySelector('#tweetResults')
+    box.className = 'tweetBoxShowing'
+
+    let tweeter = document.querySelector('#tweeter')
+    tweeter.id = ''
+
+    let tonesDiv = document.querySelector('#tonesDiv')
+    tonesDiv.className = 'displayTones'
   }
 
   render() {
     return (
-      <div id="text">
-        <form className="form" onSubmit={this._submit}>
-          <div>
-            <label>Plain Text Here</label>
-            <br />
-            <textarea type="text" id="input_reset" onChange={this._text} placeholder="Copy and Paste text here" />
-          </div>
-          <button>Check Results!</button>
-        </form>
-        <div>
-          {this.state.textArray.map((text, i) =>
-            <p key={i}>
-              {text}
-            </p>
+      <div id="appForm">
+        <div id="foo">
+          <form className="form" onSubmit={this._submit}>
+            <div>
+              <label>Your Text Here</label>
+              <br />
+              <textarea id="input_reset" onChange={this._text} placeholder="No '@' needed!" />
+            </div>
+            <button>Check Results!</button>
+          </form>
+        </div>
+        <div id="tonesDiv" className="hide">
+          {this.state.tonesArray.map((tone, k) =>
+            <h2 className="centerText" key={k}>
+              {tone.tone_name} | {Math.floor(tone.score * 100)}%
+            </h2>
           )}
+        </div>
+        <div id="marginBottom">
+          {this.state.personalityArray
+            .sort(function(a, b) {
+              return b.percentile - a.percentile
+            })
+            .map((trait, i) =>
+              <div key={i} id="resultBox">
+                <div>
+                  <h3 className="results">
+                    <Gauge label={trait.name} percentile={Math.floor(trait.percentile * 100)} />
+                  </h3>
+                </div>
+                <div>
+                  {trait.children.map((name, j) =>
+                    <p key={j} id="traitName">
+                      {name.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+        </div>
+        <div className="tweetsWrap">
+          <div id="tweetResults" className="tweetBox">
+            <h3 id="tweeter">
+              Tweets from @{this.state.text}
+            </h3>
+            {this.state.tweetsArray.map((text, i) =>
+              <p key={i} className="results">
+                {text}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     )

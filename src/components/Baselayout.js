@@ -10,17 +10,17 @@ class Baselayout extends Component {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/about">About</NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink to="/text">Text</NavLink>
+            </li> */}
+            <li>
+              <NavLink to="usecases">Use Cases</NavLink>
             </li>
             <li>
-              <NavLink to="research">Research</NavLink>
-            </li>
-            <li>
-              <NavLink to="/observations">Observations</NavLink>
+              <NavLink to="/examples">Examples</NavLink>
             </li>
           </ul>
         </div>

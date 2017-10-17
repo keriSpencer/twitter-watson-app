@@ -47,9 +47,6 @@ class App extends Component {
     let box = document.querySelector('#tweetResults')
     box.className = 'tweetBoxShowing'
 
-    let tweeter = document.querySelector('#tweeter')
-    tweeter.id = ''
-
     let tonesDiv = document.querySelector('#tonesDiv')
     tonesDiv.className = 'displayTones'
   }
