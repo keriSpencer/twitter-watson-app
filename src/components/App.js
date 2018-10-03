@@ -16,15 +16,17 @@ class App extends Component {
   }
 
   findPersonality = text => {
-    let watsonUrl = `http://localhost:4000/?username=${text}`
-    fetch(watsonUrl).then(r => r.json()).then(json => {
-      this.setState({
-        personalityArray: json.personalities.personality,
-        tweetsArray: json.tweets,
-        tonesArray: json.tones.tones
+    let watsonUrl = `http://watson-api-app.herokuapp.com/?username=${text}`
+    fetch(watsonUrl)
+      .then(r => r.json())
+      .then(json => {
+        this.setState({
+          personalityArray: json.personalities.personality,
+          tweetsArray: json.tweets
+          // tonesArray: json.tones.tones
+        })
+        console.log(json)
       })
-      console.log(json)
-    })
   }
 
   _text = e => {
@@ -65,18 +67,18 @@ class App extends Component {
           </form>
         </div>
         <div id="tonesDiv" className="hide">
-          {this.state.tonesArray.map((tone, k) =>
+          {this.state.tonesArray.map((tone, k) => (
             <h2 className="centerText" key={k}>
               {tone.tone_name} | {Math.floor(tone.score * 100)}%
             </h2>
-          )}
+          ))}
         </div>
         <div id="marginBottom">
           {this.state.personalityArray
             .sort(function(a, b) {
               return b.percentile - a.percentile
             })
-            .map((trait, i) =>
+            .map((trait, i) => (
               <div key={i} id="resultBox">
                 <div>
                   <h3 className="results">
@@ -84,25 +86,23 @@ class App extends Component {
                   </h3>
                 </div>
                 <div>
-                  {trait.children.map((name, j) =>
+                  {trait.children.map((name, j) => (
                     <p key={j} id="traitName">
                       {name.name}
                     </p>
-                  )}
+                  ))}
                 </div>
               </div>
-            )}
+            ))}
         </div>
         <div className="tweetsWrap">
           <div id="tweetResults" className="tweetBox">
-            <h3 id="tweeter">
-              Tweets from @{this.state.text}
-            </h3>
-            {this.state.tweetsArray.map((text, i) =>
+            <h3 id="tweeter">Tweets from @{this.state.text}</h3>
+            {this.state.tweetsArray.map((text, i) => (
               <p key={i} className="results">
                 {text}
               </p>
-            )}
+            ))}
           </div>
         </div>
       </div>

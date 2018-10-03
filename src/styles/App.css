@@ -94,7 +94,7 @@ button {
   height: 3em;
   width: 12em;
   background: #eee;
-  opacity: .6;
+  opacity: 0.6;
   padding: 15px 25px 30px 25px;
 }
 
@@ -235,12 +235,12 @@ div.tweetBoxShowing,
 div.gaugeShowing,
 div.displayTones {
   border: 4px solid white;
-  margin: .3em 3em 6em 3em;
+  margin: 0.3em 3em 6em 3em;
   padding: 1em;
 }
 
 div.displayTones {
-  border: 4px solid white;
+  border: 4px solid #666;
   margin: 9em 3em 2em 3em;
   padding: 1em;
 }
@@ -266,7 +266,7 @@ div.displayTones {
 h3.h3useCase {
   font-size: 26px;
   padding-left: 0;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
 }
 
 h3#subHeaderTone,
